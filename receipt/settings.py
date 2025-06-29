@@ -32,9 +32,21 @@ environ.Env.read_env()
 SECRET_KEY = 'django-insecure-hs0-v9y4&=or$u8uo(_wu9f8g02ml!17(j_xfbj63_d^(+v=49'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# At the top of settings.py
+import os
+
+ALLOWED_HOSTS = [
+    'form-mloz.onrender.com',
+    'localhost',
+    '127.0.0.1',
+]
+
+# Allow all subdomains of render.com (safest production approach)
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
 # Application definition
