@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kautalhore</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f5e9;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #2c5e1a 0%, #4a8c2a 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .logo-text {
+            font-weight: bold;
+            font-size: 24px;
+            color: #f8d56b;
+            text-shadow: 1px 1px 2px #000;
+        }
+        .logo-subtext {
+            font-size: 18px;
+            color: #fff;
+            margin: 5px 0;
+        }
+        .header h2 {
+            margin: 5px 0 0;
+            font-size: 18px;
+            font-weight: normal;
+            color: #f8d56b;
+        }
+        .header p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #e6e6e6;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 5px solid #4a8c2a;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c5e1a;
+        }
+        .optional {
+            color: #666;
+            font-weight: normal;
+            font-style: italic;
+        }
+        input[type="text"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #4a8c2a;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(74, 140, 42, 0.2);
+        }
+        .photo-upload {
+            border: 2px dashed #ddd;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #2c5e1a 0%, #4a8c2a 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #1e4212 0%, #3a7a22 100%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .declaration {
+            font-style: italic;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-left: 4px solid #4a8c2a;
+            color: #555;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, rgba(74, 140, 42, 0), rgba(74, 140, 42, 0.75), rgba(74, 140, 42, 0));
+            margin: 30px 0;
+        }
+        .required:after {
+            content: " *";
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-text">MIYETTI ALLAH KAUTAL HORE</div>
+        <div class="logo-subtext">FULANI SOCIO-CULTURAL ASSOCIATION</div>
+        <p>NATIONAL HEADQUARTERS: KM 22 Tudun-Wada, Karu LGA<br>Abuja-Keffi Express Way</p>
+    </div>
+
+    <div class="form-container">
+        <h2 style="color: #2c5e1a; border-bottom: 2px solid #f8d56b; padding-bottom: 5px;"> MEMBERSHIP FORM</h2>
+        
+        <form id="membershipForm" method="POST" action="{% url 'membership_form' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="membershipNo" class="required">Membership Number:</label>
+                <input type="text" id="membershipNo" name="membershipNo" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="fullName" class="required">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nationality" class="required">Nationality:</label>
+                <input type="text" id="nationality" name="nationality" value="Nigeria" required>
+            </div>
+
+            <div class="form-group">
+                <label for="stateOfOrigin" class="required">State of Origin:</label>
+                <select id="stateOfOrigin" name="stateOfOrigin" required>
+                    <option value="">Select State</option>
+                    <option value="Abia">Abia</option>
+                    <option value="Adamawa">Adamawa</option>
+                    <option value="Akwa Ibom">Akwa Ibom</option>
+                    <option value="Anambra">Anambra</option>
+                    <option value="Bauchi">Bauchi</option>
+                    <option value="Bayelsa">Bayelsa</option>
+                    <option value="Benue">Benue</option>
+                    <option value="Borno">Borno</option>
+                    <option value="Cross River">Cross River</option>
+                    <option value="Delta">Delta</option>
+                    <option value="Ebonyi">Ebonyi</option>
+                    <option value="Edo">Edo</option>
+                    <option value="Ekiti">Ekiti</option>
+                    <option value="Enugu">Enugu</option>
+                    <option value="FCT">Federal Capital Territory</option>
+                    <option value="Gombe">Gombe</option>
+                    <option value="Imo">Imo</option>
+                    <option value="Jigawa">Jigawa</option>
+                    <option value="Kaduna">Kaduna</option>
+                    <option value="Kano">Kano</option>
+                    <option value="Katsina">Katsina</option>
+                    <option value="Kebbi">Kebbi</option>
+                    <option value="Kogi">Kogi</option>
+                    <option value="Kwara">Kwara</option>
+                    <option value="Lagos">Lagos</option>
+                    <option value="Nasarawa">Nasarawa</option>
+                    <option value="Niger">Niger</option>
+                    <option value="Ogun">Ogun</option>
+                    <option value="Ondo">Ondo</option>
+                    <option value="Osun">Osun</option>
+                    <option value="Oyo">Oyo</option>
+                    <option value="Plateau">Plateau</option>
+                    <option value="Rivers">Rivers</option>
+                    <option value="Sokoto">Sokoto</option>
+                    <option value="Taraba">Taraba</option>
+                    <option value="Yobe">Yobe</option>
+                    <option value="Zamfara">Zamfara</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="lga" class="required">Local Government:</label>
+                <input type="text" id="lga" name="lga" required>
+            </div>
+            <div class="form-group">
+                <label for="nin">National Identification Number (NIN): <span class="optional">(optional)</span></label>
+                <input type="text" id="nin" name="nin" placeholder="11-digit NIN number">
+            </div>
+
+            <div class="form-group">
+                <label for="religion" class="required">Religion:</label>
+                <select id="religion" name="religion" required>
+                    <option value="">Select Religion</option>
+                    <option value="Islam">Islam</option>
+                    <option value="Christianity">Christianity</option>
+                    <option value="Traditional">Traditional</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="position" class="required">Position Held:</label>
+                <select id="position" name="position" required>
+                    <option value="">Select Position</option>
+                    <option value="President">President</option>
+                    <option value="Vice President">Vice President</option>
+                    <option value="Secretary">Secretary</option>
+                    <option value="Treasurer">Treasurer</option>
+                    <option value="Financial Secretary">Financial Secretary</option>
+                    <option value="Public Relations Officer">Public Relations Officer</option>
+                    <option value="Member">Member</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="postHeld">Post Held: <span class="optional">(if any)</span></label>
+                <input type="text" id="postHeld" name="postHeld">
+            </div>
+
+            <div class="form-group">
+                <label for="occupation" class="required">Occupation:</label>
+                <select id="occupation" name="occupation" required>
+                    <option value="">Select Occupation</option>
+                    <option value="Herder">Herder</option>
+                    <option value="Farmer">Farmer</option>
+                    <option value="Trader">Trader</option>
+                    <option value="Civil Servant">Civil Servant</option>
+                    <option value="Business Owner">Business Owner</option>
+                    <option value="Professional">Professional</option>
+                    <option value="Student">Student</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+          
+
+            <div class="form-group">
+                <label for="contactAddress" class="required">Contact Address:</label>
+                <textarea id="contactAddress" name="contactAddress" rows="3" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="phone" class="required">Telephone:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="required">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <hr>
+
+            <div class="form-group">
+                <label for="title" class="required">Title:</label>
+                <select id="title" name="title" required>
+                    <option value="">Select Title</option>
+                    <option value="Mr.">Mr.</option>
+                    <option value="Mrs.">Mrs.</option>
+                    <option value="Hajj.">Hajj.</option>
+                    <option value="Mall.">Mall.</option>
+                    <option value="Alh.">Alh.</option>
+                </select>
+            </div>
+
+            <div class="declaration">
+                I, <span id="declarationName" style="font-weight:bold; color:#2c5e1a;"></span> of <span id="declarationAddress" style="font-weight:bold;"></span> has agree with the stated rules and regulations of the Association and I am ready to abide by it for the development and progress.
+            </div>
+
+            <div class="photo-upload">
+                <h3 style="color: #2c5e1a; margin-top:0;">PASSPORT PHOTOGRAPH</h3>
+                <p style="color: #666;">Please upload a recent passport photograph (JPEG or PNG, max 2MB)</p>
+                <input type="file" id="passportPhoto" name="passportPhoto" accept="image/jpeg, image/png" required>
+            </div>
+
+            <button type="submit" class="submit-btn">SUBMIT MEMBERSHIP FORM</button>
+        </form>
+    </div>
+
+    <script>
+        // Generate random membership number
+        document.getElementById('membershipNo').value = 'MAKH-' + Math.floor(10000 + Math.random() * 90000);
+        
+        // Set today's date as default
+        document.getElementById('date').valueAsDate = new Date();
+        
+        // Update declaration in real-time
+        document.getElementById('title').addEventListener('change', updateDeclaration);
+        document.getElementById('fullName').addEventListener('input', updateDeclaration);
+        document.getElementById('contactAddress').addEventListener('input', updateDeclaration);
+        
+        function updateDeclaration() {
+            const title = document.getElementById('title').value;
+            const name = document.getElementById('fullName').value;
+            const address = document.getElementById('contactAddress').value;
+            
+            document.getElementById('declarationName').textContent = title + ' ' + name;
+            document.getElementById('declarationAddress').textContent = address;
+        }
+        
+        document.getElementById('membershipForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate NIN format if provided (11 digits)
+            const ninInput = document.getElementById('nin');
+            if (ninInput.value && !/^\d{11}$/.test(ninInput.value)) {
+                alert('Please enter a valid 11-digit NIN number or leave the field empty');
+                return;
+            }
+            
+            // Submit the form
+            this.submit();
+            alert('Membership form submitted successfully!');
+            // Here you would typically send the form data to a server
+        });
+    </script>
+    
+</body>
+</html>

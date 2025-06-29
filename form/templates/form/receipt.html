@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Membership Receipt</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f5e9;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #2c5e1a 0%, #4a8c2a 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .logo-text {
+            font-weight: bold;
+            font-size: 24px;
+            color: #f8d56b;
+            text-shadow: 1px 1px 2px #000;
+        }
+        .receipt-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 5px solid #4a8c2a;
+            position: relative;
+        }
+        .member-photo {
+            position: absolute;
+            right: 30px;
+            top: 30px;
+            width: 120px;
+            height: 150px;
+            border: 2px solid #ddd;
+            z-index: 1000;
+        }
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .receipt-details {
+            margin-right: 140px;
+        }
+        .detail-row {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .detail-label {
+            font-weight: bold;
+            color: #2c5e1a;
+            display: inline-block;
+            width: 180px;
+        }
+        .print-btn {
+            background: linear-gradient(135deg, #2c5e1a 0%, #4a8c2a 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        .print-btn:hover {
+            background: linear-gradient(135deg, #1e4212 0%, #3a7a22 100%);
+        }
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            body {
+                background-color: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-text">MIYETTI ALLAH KAUTAL HORE</div>
+        <div class="logo-subtext">FULANI SOCIO-CULTURAL ASSOCIATION</div>
+    </div>
+
+    <div class="receipt-container">
+        {% if member.passport_photo %}
+        <div class="member-photo">
+            <img src="{{ member.passport_photo.url }}" alt="Passport Photo">
+        </div>
+        {% endif %}
+        
+        <div class="receipt-details">
+            <h2 style="color: #2c5e1a; border-bottom: 2px solid #f8d56b; padding-bottom: 5px;">MEMBERSHIP RECEIPT</h2>
+            
+            <div class="detail-row">
+                <span class="detail-label">Membership Number:</span>
+                <span>{{ member.membership_no }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="detail-label">Full Name:</span>
+                <span>{{ member.full_name }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="detail-label">State of Origin:</span>
+                <span>{{ member.state_of_origin }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="detail-label">Local Government:</span>
+                <span>{{ member.lga }}</span>
+            </div>
+            
+            <div class="detail-row">
+                <span class="detail-label">Date Registered:</span>
+                <span>{{ member.created_at|date:"F j, Y" }}</span>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <p>This certifies that the above named is a registered member of our association.</p>
+            <p style="margin-top: 30px;">
+                <strong>Signature:</strong> ___________________________<br>
+                <em>For: Miyetti Allah Kautal Hore</em>
+            </p>
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <button class="print-btn" onclick="window.print()">Print Receipt</button>
+    </div>
+
+    <script>
+        // Automatically print if needed
+        if(new URLSearchParams(window.location.search).has('print')) {
+            window.print();
+        }
+    </script>
+</body>
+</html>
