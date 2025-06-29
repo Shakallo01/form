@@ -140,8 +140,17 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # Media files (user uploaded files)
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+import os
+
+# Media files configuration
+MEDIA_URL = '/media/'  # URL to access media
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Local storage path
+
+# For production on Render
+if not DEBUG:
+    # These make Django serve media files in production
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
